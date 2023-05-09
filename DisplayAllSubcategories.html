@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<link href="/static/category.css" rel="stylesheet">
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $('select').formSelect();
+    });
+
+   </script>
+<script src="/static/project.js"></script>
+
+
+
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="maincontainer">
+    <div class="box" style="padding: 20px;">
+        <div class="boxheading">
+            <span style="padding:3px;width:40%;display: flex;justify-content: flex-start"><a
+                    href="http://localhost:8000/subcategoryinterface"><i class="material-icons"
+                                                                         style="color: #FFFFFF; font-size: 24px;">add_box</i></a></span>
+            <span class="headingtext">Subcategory List</span>
+
+        </div>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>Sub Category Id</th>
+                <th>Subcategory Name</th>
+                <th>Icon</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for row in records %}
+                <tr>
+                    <td>{{ row.cname  }}/[{{ row.categoryid }}]</td>
+                    <td>{{ row.subcategoryid }}</td>
+                    <td>{{ row.subcategoryname }}</td>
+                    <td><img src="/static/{{ row.subcategoryicon }}" class="imgbtn"
+                             subcategoryid="{{ row.subcategoryid }}" subcategoryicon="{{ row.subcategoryicon }}"
+                             width="40"/></td>
+                    <td><a class="waves-effect waves-light btn modal-trigger btn editdeletebtn"
+                          cname="{{ row.cname }}" cid="{{ row.categoryid }}" scid="{{ row.subcategoryid }}" scname="{{ row.subcategoryname }}"
+                           href="#modal1">Edit/Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+
+
+        <input type="hidden" id="subcategoryid"/>
+        <div class="modelbox">
+            <div class="boxheading">
+                <span class="headingtextinterface">Subcategory Interface</span>
+            </div>
+
+
+            <div>
+                <div class="row">
+     <div class="input-field col s12">
+      <i class="material-icons prefix">add_shopping_cart</i>
+    <select id="categoryid" name="categoryid">
+      <option value="" disabled selected>Choose your option</option>
+    </select>
+     <label>Select Category Id</label>
+     </div>
+                </div>
+                </div>
+
+
+                <div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">add_shopping_cart</i>
+                            <input required id="subcategoryname" name="subcategoryname" type="text" class="validate">
+                            <label for="subcategoryname">Subcategory Name</label>
+
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col s6 btnrow">
+                            <button class="btn waves-effect waves-light btnstyle editbtn">Edit
+                                <i class="material-icons right">edit</i>
+                            </button>
+                        </div>
+
+                        <div class="col s6 btnrow">
+                            <button class="btn waves-effect waves-light btnstyle delbtn" type="button">Remove
+                                <i class="material-icons right">delete</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 btnrow">
+                            <div id="message" class="messagestyle"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        </form>
+<div class="modal-footer">
+        <a href="#!" class="waves-effect waves-green btn-flat btnclose">Close</a>
+    </div>
+
+    </div>
+
+</div>
+
+
+<!-- Modal Structure For Picture -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <div style="padding: 10px;">
+            <input type="hidden" id="icon_scid"/>
+            <img id="icon" width="200"/>
+        </div>
+        <div style="padding: 15px;"><b>Select New Picture:</b></div>
+        <div style="padding: 15px">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>File</span>
+                    <input required type="file" id="newicon">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <button class="btn waves-effect waves-light iconbtn">Edit Icon
+                <i class="material-icons right">edit</i>
+            </button>
+            <a href="#!" class="waves-effect waves-green btn-flat btniconclose">Close</a>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-2.1.1.min.js">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#modal1').modal();
+        $('#modal2').modal();
+        $('#categoryid').val(' ')
+        $('#subcategoryname').val(' ')
+
+        $('.editdeletebtn').click(function () {
+            $('#message').html("")
+            $('#categoryid').val($(this).attr('cid'))
+            $('#subcategoryname').val($(this).attr('scname'))
+
+            $('#subcategoryid').val($(this).attr('scid'))
+            $('select').formSelect()
+        })
+        $('.editbtn').click(function () {
+
+            $.getJSON('http://localhost:8000/editsubcategory', {
+                subcategoryid: $('#subcategoryid').val(),
+                categoryid: $('#categoryid').val(),
+                subcategoryname: $('#subcategoryname').val()
+            }, function (data) {
+                if (data.result) {
+                    $('#message').html("Subcategory Updated Successfully..")
+                } else {
+                    $('#message').html("Fail to  Update Subcategory..")
+                }
+
+            })
+
+        })
+
+        $('.delbtn').click(function () {
+            $.getJSON('http://localhost:8000/deletesubcategory', {subcategoryid: $('#subcategoryid').val()}, function (data) {
+                if (data.result) {
+                    $('#message').html("Subcategory Deleted Successfully..")
+                } else {
+                    $('#message').html("Fail to  Delete Subcategory..")
+                }
+
+            })
+
+        })
+
+        $('.btnclose').click(function () {
+
+            $('#modal1').modal('close');
+            window.location.reload('http://localhost:8000/displayallsubcategories')
+
+        })
+
+
+        $('.btniconclose').click(function () {
+
+            $('#modal2').modal('close');
+            window.location.reload('http://localhost:8000/displayallsubcategories')
+
+        })
+
+        $('.imgbtn').click(function () {
+            alert($(this).attr('subcategoryid'))
+            $('#icon_scid').val($(this).attr('subcategoryid'))
+            $('#modal2').modal('open');
+            $('#icon').attr('src', `/static/${$(this).attr('subcategoryicon')}`)
+        })
+    });
+
+
+    $('.iconbtn').click(function () {
+        var formData = new FormData()
+        alert($('#icon_scid').val())
+        formData.append('subcategoryid', $('#icon_scid').val())
+        var file = $('#newicon')[0].files
+        if (file.length > 0)
+            formData.append('subcategoryicon', file[0])
+
+        $.ajax({
+            url: '/editsubcategoryicon',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response != 0) {
+                    alert
+                    (true)
+                } else {
+                    alert(false)
+                }
+            }
+
+        })
+
+    })
+
+
+</script>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<link href="/static/category.css" rel="stylesheet">
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+    $('select').formSelect();
+    });
+
+   </script>
+<script src="/static/project.js"></script>
+    <meta charset="UTF-8">
+    <title>Subcategory Interface</title>
+</head>
+<body>
+<form action="/submitsubcategory" enctype="multipart/form-data" method="post"> {% csrf_token %}
+    <div class="maincontainer">
+        <div class="box">
+            <div class="boxheading">
+                <span class="headingtextinterface">SubCategory Interface</span>
+                <span style="padding:3px;width:65%;display: flex;justify-content: flex-end"><a href="http://localhost:8000/displayallsubcategories"><i class="material-icons" style="color: #FFFFFF; font-size: 24px;">toc</i></a></span>
+            </div>
+
+
+            <div style="margin-top: 10px;">
+                <div class="row">
+                    <div class="input-field col s12">
+      <i class="material-icons prefix">add_shopping_cart</i>
+    <select id="categoryid" name="categoryid">
+      <option value="" disabled selected>Choose your option</option>
+    </select>
+     <label>Select Category Id</label>
+     </div>
+                </div>
+
+
+                <div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">add_shopping_cart</i>
+                            <input required id="subcategoryname" name="subcategoryname" type="text" class="validate">
+                            <label for="subcategoryname">SubCategory Name</label>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="input-field col s12">
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                    <span>File</span>
+                                    <input required type="file" name="subcategoryicon">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col s6 btnrow">
+                        <button class="btn waves-effect waves-light btnstyle" type="submit" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
+                    <div class="col s6 btnrow">
+                        <button class="btn waves-effect waves-light btnstyle" type="reset" name="action">Reset
+                            <i class="material-icons right">delete</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 btnrow">
+                        <div class="messagestyle">{{ message }}</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>

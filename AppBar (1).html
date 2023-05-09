@@ -1,0 +1,158 @@
+<head>
+    <meta charset="UTF-8">
+    		<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="/static/userinterface.js"></script>
+
+    <title>MedAssist</title>
+
+</head>
+
+
+
+  <nav>
+    <div class="nav-wrapper" style="background: #30336b;">
+        <a href="#!" class="brand-logo"><span style="color: #fff;font-size: larger;font-weight: bolder;margin-left:5px">Med-Assist</span></a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <span class="right">
+            <span id="shoppingcart" style="font-size: 10px;">(0 Articals)&nbsp;&nbsp;&nbsp;</span>
+        </span>
+
+        <span class="right">
+        <i class="material-icons"><a href="http://localhost:8000/mycart">shopping_cart</a></i>
+      </span>
+        <div class="right" style="margin-right: 20px;"><a class="waves-effect waves-light modal-trigger" href="#modal3">Registration</a></div>
+        <div class="right" style="margin-right: 20px;"><a class="waves-effect waves-light modal-trigger" href="#modal2">Signin</a></div>
+        <div class="right" style="margin-right: 20px;"><a class="waves-effect waves-light modal-trigger" href="#modal1">Popup</a></div>
+        <ul class="right hide-on-med-and-down mainmenu" >
+
+
+      </ul>
+
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>
+
+
+<!-- Modal Structure -->
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <div class="row">
+          <div class="col s5" style="background-color: #66DAC8;" >
+              <div style="font-weight: bold;font-size: 25px;color: #30336b;">LOCATION</div>
+              <div style="margin-top: 10px;">Select your location/address to see accurate product delivery date.</div>
+              <div><img src="/static/cosmetic.jfif" style="width: 80%; margin-top: 30px;"></div>
+          </div>
+          <div class="col s7">
+              <div style="font-weight: bold;font-size: 25px;color: #30336b;">SELECT ADDRESS</div>
+              <div>
+                  <div>Login to view your saved delivery address</div>
+                  <div><button class="btn waves-effect waves-light btnsize btn">LOGIN</button></div>
+              </div>
+              <div style="font-weight: bold;font-size: 25px; display: flex;justify-content: center;">OR</div>
+              <div>PINCODE</div>
+              <div>
+                  <div>Enter a pincode</div>
+                  <div class="row">
+                      <span>
+                          <input type="text" >
+                          <button>APPLY</button>
+                      </span>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat red">Close</a>
+    </div>
+  </div>
+
+
+
+<!-- Modal Structure for Signin -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <div class="maincontainer" style="max-height: 700px;">
+        <div class="box">
+            <div class="row" style="">
+                <div class="col s6" style="padding: 0px;margin: 0px;">
+                    <img src="/static/cosmetic.jfif" style="width: 100%; height: 100%;">
+                </div>
+                <div class="col s6" style="margin-top: 30px; margin-bottom: 30px;">
+                    <span style="font-size: 25px; font-weight: bold;display: flex;justify-content: center;">Sign in</span>
+                    <div style="font-size: 20px;display: flex;justify-content: center;">Sign in to access your Orders, Offers and Wishlist.</div>
+
+                   <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input required placeholder="Enter your Mobile No." id="mobileno" name="mobileno" type="number" class="validate">
+                        <input required placeholder="Enter your OTP" id="otp" name="otp" type="text" class="validate">
+                        <span style="font-weight: bold;display: flex;justify-content: center;">Waiting for OTP...60 sec</span>
+                        <div><button class="btn wave light-wave" style="width: 80%;margin-left: 39px;margin-top: 20px;">Verify</button></div>
+                   </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat red">Close</a>
+    </div>
+  </div>
+
+
+
+<!-- Modal Structure  for Popup-->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="maincontainer" style="max-height: 700px;">
+        <div class="box">
+            <div class="row" style="">
+                <div class="col s6" style="padding: 0px;margin: 0px;">
+                    <img src="/static/cosmetic.jfif" style="width: 80%;">
+                </div>
+                <div class="col s6" style="margin-top: 30px; margin-bottom: 30px;">
+                    <span style="font-size: 25px; font-weight: bold;display: flex;justify-content: center;">Welcome, #Med-Assist</span>
+                    <div style="font-size: 20px;display: flex;justify-content: center;">Buy your eyedeal pair and</div>
+                    <div style="font-size: 20px;display: flex;justify-content: center;"> get a 2nd one on the housse!</div>
+                    <div style="font-size: 20px;display: flex;justify-content: center;">Sign up to avail the offer!</div>
+
+                   <table><tr>
+                       <th>+91</th>
+                       <th><input required id="number" name="number" placeholder="Enter Contact Details" type="text" class="validate"></th></tr></table>
+                    <span><input class="btn" type="button" value="I'm in !" style="background: #01a3a4 ; padding: 5px; margin-left: 20px; width: 80%;"></span>
+                    <div style="margin-top: 20px;font-weight: bold;">No, I want to pay full price</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat red">Close</a>
+    </div>
+  </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<link href="/static/category.css" rel="stylesheet">
+<html lang="en">
+<head>
+
+
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/project.js"></script>
+
+
+
+
+    <meta charset="UTF-8">
+    <title>Brand Interface</title>
+</head>
+<body>
+
+<form action="/submitbrand" enctype="multipart/form-data" method="post">{% csrf_token %}
+{#    Whole screen     #}
+<div class="maincontainer">
+{#    Box in middle    #}
+    <div class="box" style="padding: 15px;">
+{#        Heading in box#}
+        <div class="boxheading">
+            <span class="headingtextinterface" >Brand Interface</span>
+            <span>
+                <a href="http://localhost:8000/displayallbrands"><i class="material-icons right" style="color: white;padding-right: 10px;">toc</i></a>
+            </span>
+
+{#            Heading in box closed#}
+        </div>
+        <div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <select id="categoryid" name="categoryid">
+                        <option value="" disabled selected>Choose your option</option>
+                    </select>
+                <label for="categoryid">Choose Category</label>
+{#                    Column ended#}
+                </div>
+
+
+                <div class="input-field col s6">
+                    <select id="subcategoryid" name="subcategoryid">
+                        <option value="" disabled selected>Choose your option</option>
+                    </select>
+                <label for="subcategoryid">Choose SubCategory</label>
+{#                    Column ended#}
+                </div>
+            </div>
+
+             <div class="row">
+{#                Only one column of 12 grids#}
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input required id="brandname" name="brandname" type="text" class="validate">
+                    <label for="brandname">Brand Name</label>
+{#                    Column ended#}
+                </div>
+{#                Sub Category name input row closed#}
+
+{#                Only one column of 12 grids#}
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input required id="contactperson" name="contactperson" type="text" class="validate">
+                    <label for="contactperson">Contact Person</label>
+{#                    Column ended#}
+                </div>
+{#                Sub Category name input row closed#}
+            </div>
+             <div class="row">
+{#                Only one column of 12 grids#}
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input required id="mobile" name="mobile" type="text" class="validate">
+                    <label for="mobile">Mobile Number</label>
+{#                    Column ended#}
+                </div>
+{#                Sub Category name input row closed#}
+
+                <div class="input-field col s6">
+                    <div class="file-field input-field">
+                    <div class="btn">
+                    <span>File</span>
+                    <input type="file" required name="brandicon">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                    </div>
+                    </div>
+{#                    Column closed#}
+                </div>
+{#                Third row of uploading file closed#}
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="status" name="status">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="Top">Top</option>
+                        <option value="Trending">Trending</option>
+                        <option value="Popular">Popular</option>
+                        <option value="Discontinue">Discontinue</option>
+                    </select>
+                <label for="status">Status</label>
+{#                    Column ended#}
+                </div>
+            </div>
+            <div class="row">
+{#                First colum of 6 grids for submit button#}
+                <div class="col s6 btnrow">
+                    <button class="btn waves-effect waves-light btnsize btn" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                    </button>
+{#                    Submit button column ended#}
+                </div>
+{#                Second column of reset button #}
+                <div class="col s6 btnrow">
+                    <button class="btn waves-effect waves-light btnsize btntransition" type="reset" name="action">Reset
+                    <i class="material-icons right">delete</i>
+                    </button>
+{#                    Reset button column closed#}
+                </div>
+{#                Fourth row of buttons closed#}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 btnrow">
+                <span class="messagestyle">{{ message }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</body>
+<!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+</html>
+

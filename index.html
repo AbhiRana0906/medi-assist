@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+  window.addEventListener( "pageshow", function ( event ) {
+  var historyTraversal = event.persisted ||
+                         ( typeof window.performance != "undefined" &&
+                              window.performance.navigation.type === 2 );
+  if ( historyTraversal ) {
+    // Handle page restore.
+    window.location.reload();
+  }
+});
+</script>
+<body>
+<div>
+{% include 'AppBar.html'  %}
+<div>
+    <div class="carousel carousel-slider">
+    <a class="carousel-item" href="#one!"><img src="/static/1.jpg"></a>
+    <a class="carousel-item" href="#two!"><img src="/static/2.jpg"></a>
+    <a class="carousel-item" href="#three!"><img src="/static/3.jpg"></a>
+    <a class="carousel-item" href="#four!"><img src="/static/4.jpg"></a>
+  </div>
+</div>
+<!--
+Sub category
+-->
+<div  style="display:flex; flex-direction: row;flex-wrap: wrap;" id="subcategorylist">
+</div>
+
+
+
+
+
+
+<div id="productlist" style="padding: 5px; display: flex; flex-direction: row; flex-wrap: wrap;" >
+
+</div>
+
+{% include 'Footer.html' %}
+
+
+</div>
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script>
+        $(document).ready(function(){
+    var newdata={}
+    var products
+    $.getJSON('http://localhost:8000/fetch_all_products',function (data){
+        products=data.data
+        data.data.map((item)=>{
+
+            newdata[item.productname]=`/static/${item.productimage}`
+        })
+    } )
+
+
+    $('input.autocomplete').autocomplete({
+      data: newdata
+    });
+    $('input.autocomplete').change(function(){
+      //console.log($('input.autocomplete').val())
+       var data=products.filter(item=>item.productname==$('input.autocomplete').val())[0]
+       // console.log(data)
+        data=JSON.stringify(data)
+        window.location=`http://localhost:8000/buy_product?product=${data}`
+        })
+
+    $('.carousel.carousel-slider').carousel({
+        fullWidth: true,
+        indicators: true
+  })
+
+  });
+
+
+</script>
+
+</html>

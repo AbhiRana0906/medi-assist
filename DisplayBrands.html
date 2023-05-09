@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<link href="/static/category.css" rel="stylesheet">
+<html lang="en">
+
+<head>
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/project.js"></script>
+
+
+
+
+    <meta charset="UTF-8">
+    <title>All Brands</title>
+</head>
+
+<body>
+    <div class="maincontainer">
+
+        <div class="box" style="padding: 20px; width: 65%;">
+
+            <div class="boxheading">
+                <span style="padding-left: 5px;padding-right: 40px;">
+                    <a href="http://localhost:8000/brandinterface"><i class="material-icons left"
+                            style="color: white;">add_box</i></a>
+                </span>
+                <span class="headingtextinterface" style="padding-left: 300px">Brand List</span>
+            </div>
+
+            <table class="responsive-table striped centered">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                        <th>Brand ID</th>
+                        <th>Brand Name</th>
+                        <th>Contact Person</th>
+                        <th>Mobile</th>
+                        <th>Icon</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in brand %}
+                    <tr>
+                        <td>{{ row.cname }} [{{ row.categoryid }}]</td>
+                        <td>{{ row.scname }} [{{ row.subcategoryid }}]</td>
+                        <td>{{ row.brandid }}</td>
+                        <td>{{ row.brandname }}</td>
+                        <td>{{ row.contactperson }}</td>
+                        <td>{{ row.mobileno }}</td>
+                        <td><img src="/static/{{ row.logo }}" width='40' class="imgbtn" biconid="{{ row.brandid }}"
+                                blogo="{{ row.logo }}"></td>
+                        <td>
+                            <a class="waves-effect waves-light btn modal-trigger modalbtn" cid="{{ row.categoryid }}"
+                                scid="{{ row.subcategoryid }}" mno="{{ row.mobileno }}" bid="{{ row.brandid }}"
+                                bname="{{ row.brandname }}" cperson="{{ row.contactperson }}" href="#modal1">Update</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+    <!-- Modal Structure for Sub category -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+
+            <input type="hidden" id="brandid">
+            <input type="hidden" id="subid">
+            {# Box in middle #}
+            <div class="modalbox">
+                {# Heading in box#}
+                <div class="boxheading">
+                    <span class="headingtext">Update Brand</span>
+                    {# Heading in box closed#}
+                </div>
+                {# New container in box for input and buttons#}
+                <div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <select id="categoryid" name="categoryid">
+                                <option value="" disabled selected>Choose your option</option>
+                            </select>
+                            <label for="categoryid">Choose Category</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select id="subcategoryid" name="subcategoryid">
+                                <option value="" disabled selected>Choose your option</option>
+                            </select>
+                            <label for="subcategoryid">Choose SubCategory</label>
+                        </div>
+                    </div>
+                    {# First row contains category name#}
+                    <div class="row">
+                        {# Only one column of 12 grids#}
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input required id="brandname" value=" To avoid Transition overlap" name="brandname"
+                                type="text" class="validate">
+                            <label for="brandname">Brand Name</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input required id="contactperson" value=" To avoid Transition overlap" name="contactperson"
+                                type="text" class="validate">
+                            <label for="contactperson">contact Person</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input required id="mobileno" value=" To avoid Transition overlap" name="mobileno"
+                                type="text" class="validate">
+                            <label for="mobileno">Mobile Number</label>
+                            {# Column ended#}
+                        </div>
+                        {# Category name input row closed#}
+                    </div>
+                    {# Third row for buttons (submit and reset)#}
+                    <div class="row">
+                        {# First colum of 6 grids for submit button#}
+                        <div class="col s6 btnrow">
+                            <button class="btn waves-effect waves-white btnsize green" type="button" id="editbtnn">Edit
+                                <i class="material-icons right">edit</i>
+                            </button>
+                            {# Submit button column ended#}
+                        </div>
+                        {# Second column of reset button #}
+                        <div class="col s6 btnrow">
+                            <button class="btn waves-effect waves-white btnsize red" type="button" id="delbtn">Remove
+                                <i class="material-icons right">delete</i>
+                            </button>
+                            {# Reset button column closed#}
+                        </div>
+                        {# Third row of buttons closed#}
+                    </div>
+                    {# Container of input and buttons closed#}
+                </div>
+                <div class="row">
+                    <div class="col s12 btnrow">
+                        <span id="message" class="messagestyle"></span>
+                    </div>
+                </div>
+                {# Box in middle closed #}
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="waves-effect waves-red btn-flat btnclose">Close</a>
+        </div>
+    </div>
+
+
+
+    <!-- Modal Structure for icon-->
+    <div id="modal2" class="modal" style="width: 30%; padding: 15px;">
+        <div align="right">
+            <div class="modal-close red iconbtnclose btn">x</div>
+        </div>
+        <div class="modal-content">
+            <input type="hidden" id="iconbid">
+            <div class="btnrow"><img id="icon" width="30%"></div>
+            <div class="row">
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                        <span>Choose</span>
+                        <input type="file" required id="newicon" name="brandicon">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="btnrow">
+                <button class="btn waves-effect waves-white" type="button" id="iconbtn">Update
+                    <i class="material-icons right">edit</i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+
+        $('.modalbtn').click(function () {
+            $('#message').html('')
+            $('#categoryid').val($(this).attr('cid'))
+            $('#subid').val($(this).attr('scid'))
+            $.getJSON("http://localhost:8000/fetchallsubcategoriesjson",{categoryid: $('#categoryid').val()},function (data){
+                var records=data.data
+                records.map((item)=>{
+
+                    $('#subcategoryid').append($("<option>").text(item.subcategoryname).val(item.subcategoryid))
+                })
+                $('#subcategoryid').val($('#subid').val())
+                $('select').formSelect();
+            })
+
+            $('#brandid').val($(this).attr('bid'))
+            $('#brandname').val($(this).attr('bname'))
+            $('#contactperson').val($(this).attr('cperson'))
+            $('#mobileno').val($(this).attr('mno'))
+            $('select').formSelect()
+        })
+
+        $('#editbtnn').click(function () {
+            $.getJSON('http://localhost:8000/editbrand', { brandname: $('#brandname').val(), brandid: $('#brandid').val(), categoryid: $('#categoryid').val(), subcategoryid: $('#subcategoryid').val(), mobileno: $('#mobileno').val(), contactperson: $('#contactperson').val() }, function (data) {
+                if (data.result) {
+                    $('#message').html('Brand Updated Successfully...')
+                }
+                else {
+                    $('#message').html('Failed to Update Brand...')
+                }
+            })
+        })
+        $('#delbtn').click(function () {
+            $.getJSON('http://localhost:8000/deletebrand', { brandid: $('#brandid').val() }, function (data) {
+                if (data.result) {
+                    $('#message').html('Brand Deleted Successfully...')
+                }
+                else {
+                    $('#message').html('Failed to Delete Brand...')
+                }
+            })
+        })
+
+        $('.btnclose').click(function () {
+            window.location.reload()
+        })
+
+        $('.imgbtn').click(function () {
+
+            $('#iconbid').val($(this).attr('biconid'))
+            $('#modal2').modal('open')
+            $('#icon').attr('src', `/static/${$(this).attr('blogo')}`)
+        })
+
+        $('#iconbtn').click(function () {
+
+            var formdata = new FormData()
+            formdata.append('brandid', $('#iconbid').val())
+            var file = $('#newicon')[0].files
+            if (file.length > 0) {
+                formdata.append('logo', file[0])
+            }
+
+            $.ajax({
+                url: '/editbrandicon',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response) { alert('true') }
+                    else { alert('false') }
+                }
+            })
+        })
+
+        $('.iconbtnclose').click(function () {
+            window.location.reload()
+        })
+    });
+</script>
+
+</html>

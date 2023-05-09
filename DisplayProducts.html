@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<link href="/static/category.css" rel="stylesheet">
+<html lang="en">
+
+<head>
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/project.js"></script>
+
+
+
+
+    <meta charset="UTF-8">
+    <title>All Products</title>
+</head>
+
+<body>
+    <div class="maincontainer">
+
+        <div class="box" style="padding: 20px; width: 75%;">
+
+            <div class="boxheading">
+                <span style="padding-left: 5px;padding-right: 40px;">
+                    <a href="http://localhost:8000/productinterface"><i class="material-icons left"
+                            style="color: white;">add_box</i></a>
+                </span>
+                <span class="headingtextinterface" style="padding-left: 400px">Product List</span>
+            </div>
+
+            <table class="responsive-table striped centered">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                        <th>Brand</th>
+                        <th>product Name</th>
+                        <th>Packing Type</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Offer Price</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Product Image</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in product %}
+                    <tr>
+                        <td>{{ row.cname }} [{{ row.categoryid }}]</td>
+                        <td>{{ row.scname }} [{{ row.subcategoryid }}]</td>
+                        <td>{{ row.bname }} [{{ row.brandid }}]</td>
+                        <td>{{ row.productname }}</td>
+                        <td>{{ row.packingtype }}</td>
+                        <td>{{ row.quantity }}</td>
+                        <td>{{ row.price }}</td>
+                        <td>{{ row.offerprice }}</td>
+                        <td>{{ row.rating }}</td>
+                        <td>{{ row.status }}/{{ row.salestatus }}</td>
+                        <td><img src="/static/{{ row.productimage }}" width='40' class="imgbtn"
+                                piconid="{{ row.productid }}" pimage="{{ row.productimage }}"></td>
+                        <td>
+                            <a class="waves-effect waves-light btn modal-trigger modalbtn" cid="{{ row.categoryid }}"
+                                scid="{{ row.subcategoryid }}" bid="{{ row.brandid }}" pid="{{ row.productid }}"
+                                pname="{{ row.productname }}" ptype="{{ row.packingtype }}" quant="{{ row.quantity }}"
+                                pr="{{ row.price }}" opr="{{ row.offerprice }}" ratin="{{ row.rating }}" stat="{{ row.status }}"
+                                sstat="{{ row.salestatus }}"
+                                href="#modal1">Update</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+    <!-- Modal Structure for Sub category -->
+    <div id="modal1" class="modal" style="padding: 15px; max-height: 700px;">
+        <div align="right">
+            <div class="modal-close red iconbtnclose btn">x</div>
+        </div>
+        <div class="modal-content">
+
+            <input type="hidden" id="productid">
+            <input type="hidden" id="brid">
+            <input type="hidden" id="subid">
+            {# Box in middle #}
+            <div class="modalbox">
+                {# Heading in box#}
+                <div class="boxheading">
+                    <span class="headingtext">Update Product</span>
+                    {# Heading in box closed#}
+                </div>
+                {# New container in box for input and buttons#}
+                <div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <select id="categoryid" name="categoryid">
+                                <option value="" disabled selected>Choose your option</option>
+                            </select>
+                            <label for="categoryid">Choose Category</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <select id="subcategoryid" name="subcategoryid">
+                                <option value="" disabled selected>Choose your option</option>
+                            </select>
+                            <label for="subcategoryid">Choose SubCategory</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <select id="brandid" name="brandid">
+                                <option value="" disabled selected>Choose your option</option>
+                            </select>
+                            <label for="categoryid">Choose Category</label>
+                        </div>
+                    </div>
+                    {# First row contains category name#}
+                    <div class="row">
+                        {# Only one column of 12 grids#}
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input required id="productname" value=" To avoid Transition overlap" name="productname"
+                                type="text" class="validate">
+                            <label for="productname">Product Name</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s3">
+                            <select id="packingtype" name="packingtype">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option >Box</option>
+                                <option >Strip</option>
+                                <option >Sachets</option>
+                                <option >Injections</option>
+                                <option >Syrups</option>
+
+                               </select>
+                            <label for="packingtype">Packing Type</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input required id="qty" value=" To avoid Transition overlap" name="qty"
+                                type="text" class="validate">
+                            <label for="qty">Quantity</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input required id="price" value=" To avoid Transition overlap" name="price"
+                                type="text" class="validate">
+                            <label for="price">Price</label>
+                            {# Column ended#}
+                        </div>
+                        {# Category name input row closed#}
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input required id="offerprice" name="offerprice" value=" To avoid Transition overlap" type="text" class="validate">
+                            <label for="offerprice">Offer Price</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s3">
+                            <input required id="rating" name="rating" value=" To avoid Transition overlap" type="text" class="validate">
+                            <label for="rating">Rating</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s3">
+                            <select id="status" name="status">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="Top">Top</option>
+                                <option value="Trending">Trending</option>
+                                <option value="Popular">Popular</option>
+                                <option value="Discontinue">Discontinue</option>
+                            </select>
+                            <label for="status">Status</label>
+                            {# Column ended#}
+                        </div>
+                        <div class="input-field col s3">
+                            <select id="salestatus" name="salestatus">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="continue">Continue</option>
+                                <option value="discontinue">Discontinue</option>
+                            </select>
+                            <label for="salestatus">Choose Sale Status</label>
+                            {# Column ended#}
+                        </div>
+                    </div>
+                    {# Third row for buttons (submit and reset)#}
+                    <div class="row">
+                        {# First colum of 6 grids for submit button#}
+                        <div class="col s6 btnrow">
+                            <button class="btn waves-effect waves-white btnsize green" type="button" id="editbtnn">Edit
+                                <i class="material-icons right">edit</i>
+                            </button>
+                            {# Submit button column ended#}
+                        </div>
+                        {# Second column of reset button #}
+                        <div class="col s6 btnrow">
+                            <button class="btn waves-effect waves-white btnsize red" type="button" id="delbtn">Remove
+                                <i class="material-icons right">delete</i>
+                            </button>
+                            {# Reset button column closed#}
+                        </div>
+                        {# Third row of buttons closed#}
+                    </div>
+                    {# Container of input and buttons closed#}
+                </div>
+                <div class="row">
+                    <div class="col s12 btnrow">
+                        <span id="message" class="messagestyle"></span>
+                    </div>
+                </div>
+                {# Box in middle closed #}
+            </div>
+        </div>
+        
+    </div>
+
+
+
+    <!-- Modal Structure for icon-->
+    <div id="modal2" class="modal" style="width: 30%; padding: 15px;">
+        <div align="right">
+            <div class="modal-close red iconbtnclose btn">x</div>
+        </div>
+        <div class="modal-content">
+            <input type="hidden" id="iconpid">
+            <div class="btnrow"><img id="icon" width="30%"></div>
+            <div class="row">
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                        <span>Choose</span>
+                        <input type="file" required id="newicon" name="brandicon">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="btnrow">
+                <button class="btn waves-effect waves-white" type="button" id="iconbtn">Update
+                    <i class="material-icons right">edit</i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+
+        $('.modalbtn').click(function () {
+            $('#message').html('')
+            $('#categoryid').val($(this).attr('cid'))
+            $('#subid').val($(this).attr('scid'))
+            $('#brid').val($(this).attr('bid'))
+            $.getJSON("http://localhost:8000/fetchallsubcategoriesjson",{categoryid: $('#categoryid').val()},function (data){
+                var records=data.data
+                records.map((item)=>{
+
+                    $('#subcategoryid').append($("<option>").text(item.subcategoryname).val(item.subcategoryid))
+                })
+                $('#subcategoryid').val($('#subid').val())
+                $('select').formSelect();
+            })
+            
+            $.getJSON("http://localhost:8000/fetchallbrandsjson", { categoryid: $('#categoryid').val(),subcategoryid: $('#subid').val() }, function (data) {
+
+                var records = data.data
+                records.map((item) => {
+
+                    $('#brandid').append($("<option>").text(item.brandname).val(item.brandid))
+                })
+                $('#brandid').val($('#brid').val())
+                $('select').formSelect();
+            })
+
+            $('#productid').val($(this).attr('pid'))
+            $('#productname').val($(this).attr('pname'))
+            $('#packingtype').val($(this).attr('ptype'))
+            $('#qty').val($(this).attr('quant'))
+            $('#price').val($(this).attr('pr'))
+            $('#offerprice').val($(this).attr('opr'))
+            $('#rating').val($(this).attr('ratin'))
+            $('#status').val($(this).attr('stat'))
+            $('#salestatus').val($(this).attr('sstat'))
+            $('select').formSelect()
+        })
+
+        $('#editbtnn').click(function () {
+            $.getJSON('http://localhost:8000/editproducts', { productname: $('#productname').val(), productid: $('#productid').val(), categoryid: $('#categoryid').val(), subcategoryid: $('#subcategoryid').val(),brandid: $('#brandid').val() ,price: $('#price').val(), offerprice: $('#offerprice').val(),packingtype: $('#packingtype').val(),qty: $('#qty').val(),rating: $('#rating').val(),status: $('#status').val(),salestatus: $('#salestatus').val() }, function (data) {
+                if (data.result) {
+                    $('#message').html('Product Updated Successfully...')
+                }
+                else {
+                    $('#message').html('Failed to Update Product...')
+                }
+            })
+        })
+        $('#delbtn').click(function () {
+            $.getJSON('http://localhost:8000/deleteproduct', { productid: $('#productid').val() }, function (data) {
+                if (data.result) {
+                    $('#message').html('Product Deleted Successfully...')
+                }
+                else {
+                    $('#message').html('Failed to Delete Product...')
+                }
+            })
+        })
+
+        $('.btnclose').click(function () {
+            window.location.reload()
+        })
+
+        $('.imgbtn').click(function () {
+
+            $('#iconpid').val($(this).attr('piconid'))
+            $('#modal2').modal('open')
+            $('#icon').attr('src', `/static/${$(this).attr('pimage')}`)
+        })
+
+        $('#iconbtn').click(function () {
+
+            var formdata = new FormData()
+            formdata.append('productid', $('#iconpid').val())
+            var file = $('#newicon')[0].files
+            if (file.length > 0) {
+                formdata.append('image', file[0])
+            }
+
+            $.ajax({
+                url: '/editproductimage',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response) { alert('true') }
+                    else { alert('false') }
+                }
+            })
+        })
+
+        $('.iconbtnclose').click(function () {
+            window.location.reload()
+        })
+
+    });
+</script>
+</html>

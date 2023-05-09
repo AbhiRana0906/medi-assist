@@ -1,0 +1,96 @@
+Categories
+==========
+categoryid pk
+categoryname
+categoryicon
+
+subcategory
+===========
+categoryid
+subcategoryid
+subcategoryname
+subcategoryicon
+
+brand
+=====
+categoryid
+subcategoryid
+brandid
+brandname
+contactperson
+mobileno
+status
+brandlogo
+
+products
+=========
+productid pk
+categoryid dd
+subcategoryid dd
+brandid dd
+
+productname
+price
+offerprice
+packingtype DD
+qty
+productimage
+status DD
+rating
+salestatus continue/discontinue
+
+adminlogin
+----------
+emailid
+adminname
+picture
+password
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
